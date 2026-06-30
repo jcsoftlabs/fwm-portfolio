@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Fritz William Michel — Portfolio Public",
   description:
     "Prototype institutionnel pour présenter le parcours public, la vision et les actualités de Fritz William Michel.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
