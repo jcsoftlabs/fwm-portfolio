@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Access for Admin
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// News & Articles
+model NewsArticle {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  date      DateTime
+  category  String
+  excerpt   String
+  content   String[] // Array of paragraphs
+  imagePath String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Parcours (Journey/Experience)
+model Experience {
+  id          String   @id @default(cuid())
+  period      String
+  title       String
+  description String
+  category    String   // "Formation", "Administration", "Service public", "Leadership"
+  isCurrent   Boolean  @default(false)
+  order       Int      @default(0) // For custom sorting
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Achievements (Réalisations)
+model Achievement {
+  id                String   @id @default(cuid())
+  title             String
+  description       String
+  domain            String
+  period            String
+  status            String   // "verified", "to-complete", "document-required"
+  needsVerification Boolean  @default(false)
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// Vision Axes
+model VisionAxis {
+  id          String   @id @default(cuid())
+  title       String
+  icon        String   // "Shield", "Landmark", etc.
+  description String
+  objectives  String[]
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Gallery & Media
+model Album {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  coverImage  String?
+  photos      Photo[]
+  published   Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Photo {
+  id          String   @id @default(cuid())
+  albumId     String?
+  album       Album?   @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  url         String   // Cloudinary URL
+  publicId    String?  // Cloudinary Public ID for deletion
+  title       String?
+  description String?
+  type        String   @default("photo") // "photo", "video", "press", "quote"
+  createdAt   DateTime @default(now())
+}
+
+// Newsletter Subscribers
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+// Global Settings (Singleton pattern usually handled by hardcoding id='global')
+model Setting {
+  id           String @id @default("global")
+  profileName  String @default("Fritz William Michel")
+  profileTitle String @default("Administrateur public, dirigeant et personnalité publique haïtienne")
+  location     String @default("Haïti")
+  shortBio     String @db.Text
+  generalEmail String @default("contact@fritzwilliammichel.ht")
+  pressEmail   String @default("presse@fritzwilliammichel.ht")
+  office       String @default("Port-au-Prince, Haïti")
+  twitterUrl   String?
+  facebookUrl  String?
+  linkedinUrl  String?
+  youtubeUrl   String?
+  updatedAt    DateTime @updatedAt
+}
