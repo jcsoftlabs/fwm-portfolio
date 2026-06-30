@@ -41,7 +41,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="border border-slate-200 bg-white p-8 md:p-12 shadow-soft">
           <div className="space-y-6 text-base leading-8 text-steel">
-            {article.content.map((paragraph) => (
+            {(article.content as string[]).map((paragraph: string) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
