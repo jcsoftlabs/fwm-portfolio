@@ -59,7 +59,7 @@ export default async function AdminAlbumDetailsPage({ params }: { params: Promis
                 <p className="text-slate-400">Aucune photo dans cet album.</p>
               </div>
             ) : (
-              album.photos.map((photo) => (
+              (album.photos as any[]).map((photo: any) => (
                 <div key={photo.id} className="relative group bg-slate-100 aspect-square overflow-hidden border border-slate-200">
                   <img src={photo.url} alt={photo.title || ""} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-navy/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
