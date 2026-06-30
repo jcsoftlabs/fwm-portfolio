@@ -4,6 +4,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { mediaKitItems, profile } from "@/lib/mock-data";
 import prisma from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 export default async function MediasPage() {

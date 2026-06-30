@@ -9,6 +9,7 @@ import {
   seminarHighlights,
 } from "@/lib/mock-data";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 export default async function ParcoursPage() {
