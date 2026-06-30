@@ -35,13 +35,11 @@ export default async function AdminRealisationsPage() {
           <tbody className="divide-y divide-slate-200">
             {achievements.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-slate-400">
-                  Aucune réalisation enregistrée.
-                </td>
+                <td colSpan={4} className="py-8 text-center text-slate-500">Aucune réalisation trouvée</td>
               </tr>
             ) : (
-              achievements.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50 transition-colors">
+              achievements.map((item: any) => (
+                <tr key={item.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
                   <td className="px-6 py-4">
                     <span className="inline-block bg-slate-100 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-steel border border-slate-200">
                       {item.domain}

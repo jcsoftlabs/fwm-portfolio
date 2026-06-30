@@ -65,8 +65,8 @@ export default async function RealisationsPage() {
             title="Fonctions et responsabilités documentées"
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {achievements.map((achievement) => (
-              <AchievementCard key={achievement.id} achievement={achievement as any} />
+            {achievements.map((achievement: any) => (
+              <AchievementCard key={achievement.id} achievement={achievement} />
             ))}
           </div>
         </div>

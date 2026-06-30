@@ -41,7 +41,7 @@ export default async function ActualitesPage() {
           description="Retrouvez l'ensemble des communiqués, comptes rendus et notes institutionnelles publiés par Fritz William Michel."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {articles.map((article) => (
+          {articles.map((article: any) => (
             <NewsCard key={article.id} article={article as any} />
           ))}
         </div>

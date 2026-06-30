@@ -38,7 +38,7 @@ export default async function AdminNewsletterPage() {
                 </td>
               </tr>
             ) : (
-              subscribers.map((sub) => (
+              subscribers.map((sub: any) => (
                 <tr key={sub.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4 font-medium text-navy">{sub.email}</td>
                   <td className="px-6 py-4">{sub.createdAt.toLocaleDateString("fr-FR")}</td>

@@ -35,13 +35,11 @@ export default async function AdminParcoursPage() {
           <tbody className="divide-y divide-slate-200">
             {experiences.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-slate-400">
-                  Aucune expérience enregistrée.
-                </td>
+                <td colSpan={5} className="py-8 text-center text-slate-500">Aucune expérience trouvée</td>
               </tr>
             ) : (
-              experiences.map((exp) => (
-                <tr key={exp.id} className="hover:bg-slate-50 transition-colors">
+              experiences.map((exp: any) => (
+                <tr key={exp.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
                   <td className="px-6 py-4 font-medium text-navy">
                     {exp.period}
                     {exp.isCurrent && <span className="ml-2 text-[10px] bg-gold/10 text-gold px-2 py-0.5 uppercase tracking-widest border border-gold/20">En cours</span>}

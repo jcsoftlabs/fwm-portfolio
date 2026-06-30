@@ -28,7 +28,7 @@ export default async function AdminGaleriePage() {
             <p className="text-slate-400">Aucun album pour le moment.</p>
           </div>
         ) : (
-          albums.map((album) => (
+          albums.map((album: any) => (
             <Link key={album.id} href={`/admin/galerie/${album.id}`} className="group block">
               <div className="bg-white border border-slate-200 shadow-sm overflow-hidden transition-all hover:shadow-strong hover:-translate-y-1">
                 {album.coverImage ? (

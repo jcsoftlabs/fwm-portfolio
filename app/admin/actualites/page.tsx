@@ -33,15 +33,13 @@ export default async function AdminActualitesPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200">
-            {articles.length === 0 ? (
-              <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-slate-400">
-                  Aucune actualité pour le moment.
-                </td>
-              </tr>
-            ) : (
-              articles.map((article) => (
-                <tr key={article.id} className="hover:bg-slate-50 transition-colors">
+              {articles.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="py-8 text-center text-slate-500">Aucune actualité trouvée</td>
+                </tr>
+              ) : (
+                articles.map((article: any) => (
+                  <tr key={article.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
                   <td className="px-6 py-4 font-medium text-navy">{article.title}</td>
                   <td className="px-6 py-4">
                     <span className="inline-block bg-slate-100 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-steel border border-slate-200">
