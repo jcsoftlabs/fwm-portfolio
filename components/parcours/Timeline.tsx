@@ -5,10 +5,10 @@ type TimelineProps = {
 };
 
 const categoryColor: Record<string, string> = {
-  Formation: "text-haitiBlue bg-haitiBlue/10",
+  Formation: "text-gold bg-gold/10",
   Administration: "text-navy bg-slate-100",
   "Service public": "text-gold bg-amber-50",
-  Leadership: "text-haitiBlue bg-haitiBlue/10",
+  Leadership: "text-gold bg-gold/10",
 };
 
 export function Timeline({ items }: TimelineProps) {
@@ -21,7 +21,7 @@ export function Timeline({ items }: TimelineProps) {
             <div className="h-2 w-2 bg-gold" />
           </div>
 
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-haitiBlue">{item.period}</p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">{item.period}</p>
           <div className="mt-3 border border-slate-200 bg-white px-6 py-5 shadow-soft transition-shadow duration-200 hover:shadow-strong">
             <span className={`inline-block px-3 py-0.5 text-[10px] font-bold uppercase tracking-widest ${categoryColor[item.category] ?? "text-steel bg-slate-100"}`}>
               {item.category}

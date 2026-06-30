@@ -74,7 +74,7 @@ export default async function RealisationsPage() {
         {/* Reference Points + Experience */}
         <div className="mt-16 grid gap-6 lg:grid-cols-[0.95fr,1.05fr]">
           <div className="border border-slate-200 bg-white shadow-soft p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-haitiBlue">Points de référence</p>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold">Points de référence</p>
             <h2 className="mt-3 font-display text-2xl font-semibold text-navy">
               Éléments établis par le CV officiel
             </h2>
@@ -82,9 +82,9 @@ export default async function RealisationsPage() {
               {verifiedReferencePoints.map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-3 border-l-2 border-haitiBlue/30 bg-slate-50 px-4 py-3 text-sm leading-7 text-steel"
+                  className="flex items-start gap-3 border-l-2 border-gold/30 bg-slate-50 px-4 py-3 text-sm leading-7 text-steel"
                 >
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-haitiBlue" />
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
                   {item}
                 </div>
               ))}
@@ -92,7 +92,7 @@ export default async function RealisationsPage() {
           </div>
 
           <div className="border border-slate-200 bg-white shadow-soft p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-haitiBlue">Lecture institutionnelle</p>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold">Lecture institutionnelle</p>
             <h2 className="mt-3 font-display text-2xl font-semibold text-navy">
               Une trajectoire cohérente entre administration, budget et direction
             </h2>
@@ -105,7 +105,7 @@ export default async function RealisationsPage() {
                   key={item}
                   className="flex items-start gap-3 border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-steel"
                 >
-                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-haitiBlue" />
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
                   {item}
                 </div>
               ))}

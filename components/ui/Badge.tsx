@@ -16,7 +16,7 @@ type BadgeProps = {
 
 const styles: Record<BadgeVariant, string> = {
   navy: "bg-navy text-white",
-  blue: "bg-haitiBlue/10 text-haitiBlue border border-haitiBlue/20",
+  blue: "bg-gold/10 text-gold border border-gold/20",
   red: "bg-red-50 text-red-700 border border-red-200",
   gray: "bg-slate-50 text-slate-600 border border-slate-200",
   gold: "bg-amber-50 text-amber-800 border border-amber-200",

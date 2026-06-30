@@ -41,14 +41,14 @@ export default function ContactPage() {
                 <p>
                   <strong className="text-navy">Contact général :</strong>{" "}
                   <br />
-                  <a href={`mailto:${contactInfo.generalEmail}`} className="text-haitiBlue hover:underline">
+                  <a href={`mailto:${contactInfo.generalEmail}`} className="text-gold hover:underline">
                     {contactInfo.generalEmail}
                   </a>
                 </p>
                 <p>
                   <strong className="text-navy">Presse :</strong>{" "}
                   <br />
-                  <a href={`mailto:${contactInfo.pressEmail}`} className="text-haitiBlue hover:underline">
+                  <a href={`mailto:${contactInfo.pressEmail}`} className="text-gold hover:underline">
                     {contactInfo.pressEmail}
                   </a>
                 </p>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="inline-flex items-center justify-center rounded-none border border-slate-200 px-4 py-2 text-xs font-bold uppercase tracking-wider text-steel transition-colors hover:border-haitiBlue hover:text-haitiBlue"
+                    className="inline-flex items-center justify-center rounded-none border border-slate-200 px-4 py-2 text-xs font-bold uppercase tracking-wider text-steel transition-colors hover:border-gold hover:text-gold"
                   >
                     {link.label}
                   </a>

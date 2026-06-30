@@ -25,7 +25,7 @@ export function MediaGallery({ items }: MediaGalleryProps) {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {items.map((item) => (
-        <div key={item.id} className="group flex flex-col border border-slate-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:border-haitiBlue/30">
+        <div key={item.id} className="group flex flex-col border border-slate-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:border-gold/30">
           {item.imagePath ? (
             <div className="relative h-64 overflow-hidden">
               <Image
@@ -44,7 +44,7 @@ export function MediaGallery({ items }: MediaGalleryProps) {
               </div>
             </div>
           ) : (
-            <div className="flex h-64 items-center justify-center bg-gradient-to-br from-navy to-haitiBlue text-center text-white">
+            <div className="flex h-64 items-center justify-center bg-gradient-to-br from-ink to-steel text-center text-white">
               <div className="px-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
                   {item.placeholder}

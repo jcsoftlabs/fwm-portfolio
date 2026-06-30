@@ -35,11 +35,11 @@ a {
   }
 
   .accent-bar {
-    background: linear-gradient(90deg, #020617 0%, #1e3a8a 100%);
+    background: linear-gradient(90deg, #222222 0%, #7B7B7B 100%);
   }
 
   .flag-line {
-    background: linear-gradient(90deg, #1e3a8a 0 50%, #991b1b 50% 100%);
+    background: linear-gradient(90deg, #222222 0 50%, #A8872A 50% 100%);
   }
 
   .reveal-up {

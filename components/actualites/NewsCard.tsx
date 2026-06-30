@@ -52,7 +52,7 @@ export function NewsCard({ article }: NewsCardProps) {
         <p className="mt-3 flex-1 text-sm leading-relaxed text-steel">{article.excerpt}</p>
         <Link
           href={`/actualites/${article.slug}`}
-          className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-haitiBlue transition-colors hover:text-navy"
+          className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-gold transition-colors hover:text-navy"
         >
           Lire l&apos;article
           <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>

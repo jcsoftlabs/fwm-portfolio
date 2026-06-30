@@ -22,7 +22,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         type="button"
         aria-label="Ouvrir le menu"
         onClick={() => setOpen((value) => !value)}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-none border border-slate-200 bg-white text-navy shadow-sm transition-colors hover:border-haitiBlue"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-none border border-slate-200 bg-white text-navy shadow-sm transition-colors hover:border-gold"
       >
         <span className="space-y-1">
           <span className={cn("block h-0.5 w-5 bg-current transition", open && "translate-y-1.5 rotate-45")} />
@@ -39,7 +39,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-none border-l-2 border-transparent px-4 py-3 text-sm font-semibold uppercase tracking-wider text-navy transition-colors hover:border-haitiBlue hover:bg-slate-50"
+                className="rounded-none border-l-2 border-transparent px-4 py-3 text-sm font-semibold uppercase tracking-wider text-navy transition-colors hover:border-gold hover:bg-slate-50"
               >
                 {item.label}
               </Link>

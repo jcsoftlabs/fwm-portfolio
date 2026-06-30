@@ -16,12 +16,12 @@ export function AchievementCard({ achievement }: AchievementCardProps) {
   const status = labels[achievement.status];
 
   return (
-    <div className="group flex flex-col border border-slate-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:border-haitiBlue/30">
-      <div className="h-[3px] w-full bg-gradient-to-r from-navy to-haitiBlue" />
+    <div className="group flex flex-col border border-slate-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:border-gold/30">
+      <div className="h-[3px] w-full bg-gradient-to-r from-ink to-steel" />
       <div className="flex-1 p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-haitiBlue">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold">
               {achievement.domain}
             </p>
             <h3 className="mt-3 font-display text-xl font-semibold text-navy leading-snug">{achievement.title}</h3>
