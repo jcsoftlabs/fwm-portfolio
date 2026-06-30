@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { MobileMenu } from "@/components/layout/MobileMenu";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Accueil" },
@@ -12,6 +15,11 @@ const navItems = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
+  const isAdminOrLogin = pathname?.startsWith("/admin") || pathname?.startsWith("/login");
+
+  if (isAdminOrLogin) return null;
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-100">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">

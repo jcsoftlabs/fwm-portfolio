@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { NewsletterForm } from "../ui/NewsletterForm";
+import { usePathname } from "next/navigation";
 
 const footerNav = [
   {
@@ -29,6 +32,11 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+  const isAdminOrLogin = pathname?.startsWith("/admin") || pathname?.startsWith("/login");
+
+  if (isAdminOrLogin) return null;
+
   return (
     <footer className="mt-0 bg-ink text-white">
 
