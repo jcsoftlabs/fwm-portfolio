@@ -1,9 +1,10 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { AchievementCard } from "@/components/realisations/AchievementCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import prisma from "@/lib/prisma";
+import { Card } from "@/components/ui/Card";
+import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
-import { Spotlight } from "@/components/ui/Spotlight";
+import prisma from "@/lib/prisma";
 import {
   contributionThemes,
   professionalExperience,
@@ -13,96 +14,92 @@ import {
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
+const themeIcons = ["trending", "landmark", "messages", "briefcase"];
+
 export default async function RealisationsPage() {
   const achievements = await prisma.achievement.findMany({
     orderBy: { createdAt: "desc" },
   });
 
   return (
-    <div className="pb-32">
+    <div>
       <PageHero title="Réalisations" accent="clés" description="Contributions, responsabilités et repères d'expérience dans l'administration publique haïtienne et le secteur privé." />
 
-      {/* Content */}
-      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-
-        {/* Contribution Themes */}
-        <SectionTitle
-          eyebrow="Axes de contribution"
-          title="Domaines d'expertise et de responsabilité"
-          description="Quatre axes structurants qui reflètent l'étendue et la cohérence du parcours professionnel."
-        />
-        <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {contributionThemes.map((section, i) => (
-            <Reveal key={section.title} animation="blur" delay={i * 90}>
-              <Spotlight className="h-full p-8">
-                <div className="flex items-center justify-between">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Axe</p>
-                  <span className="font-display text-4xl italic text-white/10 transition-colors duration-500 group-hover:text-gold/40">0{i + 1}</span>
-                </div>
-                <h2 className="mt-8 font-display text-3xl leading-tight text-white">{section.title}</h2>
-                <p className="mt-4 text-sm leading-relaxed text-white/50">{section.description}</p>
-              </Spotlight>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Achievements */}
-        <div className="mt-32">
+      {/* Axes de contribution */}
+      <section className="section">
+        <div className="page-shell">
           <SectionTitle
-            eyebrow="Responsabilités clés"
-            title="Fonctions et responsabilités documentées"
+            eyebrow="Axes de contribution"
+            title="Domaines d'expertise et de responsabilité"
+            description="Quatre axes structurants qui reflètent l'étendue et la cohérence du parcours professionnel."
           />
-          <div className="mt-14 grid gap-5 lg:grid-cols-2">
+          <div className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+            {contributionThemes.map((section, i) => (
+              <Reveal key={section.title} delay={i * 90}>
+                <div className="neu-card h-full px-8 py-11">
+                  <Icon name={themeIcons[i] ?? "check"} className="h-10 w-10 text-accent" strokeWidth={1.2} />
+                  <h2 className="mt-7 font-display text-xl font-semibold text-heading">{section.title}</h2>
+                  <p className="mt-4 text-[15px] leading-7 text-body">{section.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Responsabilités documentées */}
+      <section className="section">
+        <div className="page-shell">
+          <SectionTitle eyebrow="Responsabilités clés" title="Fonctions et responsabilités documentées" />
+          <div className="mt-14 grid gap-8 lg:grid-cols-2">
             {achievements.map((achievement: any) => (
-              <Reveal key={achievement.id} animation="blur">
+              <Reveal key={achievement.id}>
                 <AchievementCard achievement={achievement} />
               </Reveal>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Reference Points + Experience */}
-        <div className="mt-32 grid gap-5 lg:grid-cols-[0.95fr,1.05fr]">
-          <div className="gold-border rounded-3xl bg-gradient-to-br from-gold/10 to-onyx p-8 sm:p-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Points de référence</p>
-            <h2 className="mt-3 font-display text-4xl leading-tight text-white">
-              Éléments établis par le CV officiel
-            </h2>
-            <div className="mt-6 space-y-3">
-              {verifiedReferencePoints.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-sm leading-7 text-white/60"
-                >
-                  <span className="mt-0.5 text-xs text-gold">✓</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Points de référence + lecture */}
+      <section className="section border-b-0">
+        <div className="page-shell grid gap-8 lg:grid-cols-2">
+          <Reveal>
+            <Card className="h-full">
+              <span className="label !text-xs">Points de référence</span>
+              <h2 className="mt-3 font-display text-3xl font-bold text-heading">Éléments établis par le CV officiel</h2>
+              <ul className="mt-8 space-y-4">
+                {verifiedReferencePoints.map((item) => (
+                  <li key={item} className="flex items-start gap-4 text-[15px] leading-7 text-body">
+                    <Icon name="check" className="mt-1 h-5 w-5 shrink-0 text-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </Reveal>
 
-          <div className="glass rounded-3xl p-8 sm:p-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Lecture institutionnelle</p>
-            <h2 className="mt-3 font-display text-4xl leading-tight text-white">
-              Une trajectoire cohérente entre administration, budget et direction
-            </h2>
-            <p className="mt-4 text-sm leading-8 text-white/55">
-              Maîtrise des sujets administratifs et budgétaires, expérience de coordination publique, puis prise de responsabilités exécutives dans le secteur privé — une trajectoire qui reflète la continuité et la progression d'un haut fonctionnaire engagé.
-            </p>
-            <div className="mt-6 grid gap-3">
-              {professionalExperience.slice(0, 4).map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-sm leading-7 text-white/60"
-                >
-                  <span className="mt-0.5 text-xs text-gold">✦</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+          <Reveal delay={100}>
+            <Card className="h-full">
+              <span className="label !text-xs">Lecture institutionnelle</span>
+              <h2 className="mt-3 font-display text-3xl font-bold text-heading">
+                Une trajectoire cohérente entre administration, budget et direction
+              </h2>
+              <p className="mt-6 text-[15px] leading-8 text-body">
+                Maîtrise des sujets administratifs et budgétaires, expérience de coordination publique, puis prise de responsabilités exécutives dans le secteur privé — une trajectoire qui reflète la continuité et la progression d&apos;un haut fonctionnaire engagé.
+              </p>
+              <ul className="mt-8 space-y-4">
+                {professionalExperience.slice(0, 4).map((item) => (
+                  <li key={item} className="flex items-start gap-4 text-[15px] leading-7 text-body">
+                    <Icon name="briefcase" className="mt-1 h-5 w-5 shrink-0 text-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </Reveal>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

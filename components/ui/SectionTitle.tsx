@@ -13,14 +13,12 @@ export function SectionTitle({
 }: SectionTitleProps) {
   return (
     <div className={align === "center" ? "mx-auto flex max-w-3xl flex-col items-center text-center" : "max-w-3xl"}>
-      {eyebrow ? <span className="eyebrow mb-6">{eyebrow}</span> : null}
-      <h2 className="font-display text-4xl leading-[1.05] tracking-tight text-white md:text-5xl">
+      {eyebrow ? <span className="label mb-4">{eyebrow}</span> : null}
+      <h2 className="font-display text-4xl font-bold leading-tight text-heading md:text-[3.25rem]">
         {title}
       </h2>
       {description ? (
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/50 md:text-lg">
-          {description}
-        </p>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-body">{description}</p>
       ) : null}
     </div>
   );

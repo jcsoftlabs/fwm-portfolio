@@ -2,8 +2,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Timeline } from "@/components/parcours/Timeline";
 import { Card } from "@/components/ui/Card";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { Icon } from "@/components/ui/Icon";
+import { Reveal } from "@/components/ui/Reveal";
 import prisma from "@/lib/prisma";
-import { Spotlight } from "@/components/ui/Spotlight";
 import {
   languageHighlights,
   organizationHighlights,
@@ -20,82 +21,86 @@ export default async function ParcoursPage() {
   });
 
   return (
-    <div className="pb-32">
+    <div>
       <PageHero title="Parcours" accent="public" description="Une chronologie détaillée des engagements, responsabilités et formations." />
 
-      {/* Content */}
-      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
-        <SectionTitle
-          eyebrow="Biographie"
-          title="Chronologie du parcours"
-          description="Les repères ci-dessous présentent une chronologie du parcours académique, administratif et professionnel."
-        />
+      <section className="section">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <SectionTitle
+            eyebrow="Biographie"
+            title="Chronologie du parcours"
+            description="Les repères ci-dessous présentent une chronologie du parcours académique, administratif et professionnel."
+          />
+          <div className="mt-16">
+            <Timeline items={timelineItems as any} />
+          </div>
+        </div>
+      </section>
 
-        <section className="mt-20">
-          <Timeline items={timelineItems as any} />
-        </section>
+      <section className="section">
+        <div className="page-shell grid gap-8 lg:grid-cols-2">
+          <Reveal>
+            <Card className="h-full">
+              <span className="label !text-xs">Formation continue</span>
+              <h2 className="mt-3 font-display text-3xl font-bold text-heading">Séminaires et perfectionnement</h2>
+              <ul className="mt-8 space-y-5">
+                {seminarHighlights.map((item) => (
+                  <li key={item} className="flex items-start gap-4 text-[15px] leading-7 text-body">
+                    <Icon name="graduation" className="mt-1 h-5 w-5 shrink-0 text-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </Reveal>
 
-        <section className="mt-32 grid gap-5 lg:grid-cols-2">
-          <Card>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold mb-1">Formation continue</p>
-            <h2 className="font-display text-4xl leading-tight text-white mt-2">Séminaires et perfectionnement</h2>
-            <div className="mt-6 space-y-3">
-              {seminarHighlights.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-sm leading-7 text-white/60 transition-colors hover:border-gold/30"
-                >
-                  <span className="mt-0.5 text-xs text-gold">✦</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold mb-1">Compétences</p>
-            <h2 className="font-display text-4xl leading-tight text-white mt-2">Profil professionnel</h2>
-            <div className="mt-6">
-              <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">Expertise</h3>
-              <ul className="space-y-2">
+          <Reveal delay={100}>
+            <Card className="h-full">
+              <span className="label !text-xs">Compétences</span>
+              <h2 className="mt-3 font-display text-3xl font-bold text-heading">Profil professionnel</h2>
+              <p className="label-muted mt-8 !text-xs">Expertise</p>
+              <ul className="mt-5 space-y-4">
                 {professionalExperience.map((exp) => (
-                  <li key={exp} className="flex items-start gap-3 text-sm text-white/55">
-                    <span className="mt-0.5 text-xs text-gold">✦</span>
+                  <li key={exp} className="flex items-start gap-4 text-[15px] leading-7 text-body">
+                    <Icon name="check" className="mt-1 h-5 w-5 shrink-0 text-accent" />
                     {exp}
                   </li>
                 ))}
               </ul>
-            </div>
-            
-            <div className="mt-8">
-              <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">Langues</h3>
-              <div className="flex flex-wrap gap-2">
+              <p className="label-muted mt-10 !text-xs">Langues</p>
+              <div className="mt-5 flex flex-wrap gap-4">
                 {languageHighlights.map((lang) => (
-                  <span key={lang} className="rounded-full border border-gold/25 bg-gold/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-goldLight">
+                  <span key={lang} className="neu-btn !cursor-default !normal-case !tracking-normal">
                     {lang}
                   </span>
                 ))}
               </div>
-            </div>
-          </Card>
-        </section>
+            </Card>
+          </Reveal>
+        </div>
+      </section>
 
-        <section className="mt-32">
+      <section className="section border-b-0">
+        <div className="page-shell">
           <SectionTitle
             eyebrow="Gouvernance"
             title="Direction institutionnelle"
             description="Conseils d'administration et comités de direction."
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {organizationHighlights.map((org) => (
-              <Spotlight key={org} className="p-7">
-                <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-gold-metal text-sm text-night shadow-glow">◆</div>
-                <p className="font-display text-2xl leading-snug text-white">{org}</p>
-              </Spotlight>
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {organizationHighlights.map((org, i) => (
+              <Reveal key={org} delay={i * 100}>
+                <div className="neu-card flex h-full items-start gap-6 p-9">
+                  <span className="neu-icon shrink-0 text-accent">
+                    <Icon name="award" />
+                  </span>
+                  <p className="font-display text-lg font-semibold leading-snug text-heading">{org}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

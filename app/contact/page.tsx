@@ -1,64 +1,73 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ui/ContactForm";
-import { SectionTitle } from "@/components/ui/SectionTitle";
+import { Icon } from "@/components/ui/Icon";
 import { contactInfo } from "@/lib/mock-data";
 
+const socialIcons: Record<string, string> = {
+  "X (Twitter)": "twitter",
+  Facebook: "facebook",
+  LinkedIn: "linkedin",
+  YouTube: "youtube",
+};
+
 export default function ContactPage() {
+  const details = [
+    { icon: "mail", label: "Contact général", value: contactInfo.generalEmail, href: `mailto:${contactInfo.generalEmail}` },
+    { icon: "messages", label: "Presse", value: contactInfo.pressEmail, href: `mailto:${contactInfo.pressEmail}` },
+    { icon: "pin", label: "Bureau", value: contactInfo.office },
+  ];
+
   return (
-    <div className="pb-32">
+    <div>
       <PageHero title="Contact" accent="direct" description="Pour toute demande officielle, médiatique ou institutionnelle, veuillez utiliser les coordonnées ou le formulaire ci-dessous." />
 
-      {/* Content */}
-      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="grid gap-5 lg:grid-cols-[1.2fr,0.8fr]">
-          <div className="glass gold-border rounded-[2rem] p-8 sm:p-10">
-            <h2 className="font-display text-4xl leading-tight text-white mb-6">Envoyer un message</h2>
-<ContactForm />
+      <section className="section border-b-0">
+        <div className="page-shell grid gap-8 lg:grid-cols-[0.8fr,1.2fr]">
+          <div className="neu h-full p-8 sm:p-10">
+            <h2 className="font-display text-3xl font-bold text-heading">Coordonnées</h2>
+            <ul className="mt-8 space-y-6">
+              {details.map((d) => (
+                <li key={d.label} className="flex items-start gap-5">
+                  <span className="neu-icon shrink-0 text-accent">
+                    <Icon name={d.icon} />
+                  </span>
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-[0.12em] text-muted">{d.label}</p>
+                    {d.href ? (
+                      <a href={d.href} className="mt-1 block break-all text-[15px] text-heading hover:text-accent">
+                        {d.value}
+                      </a>
+                    ) : (
+                      <p className="mt-1 text-[15px] text-heading">{d.value}</p>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <p className="label-muted mt-12 !text-xs">Réseaux sociaux</p>
+            <div className="mt-5 flex flex-wrap gap-4">
+              {contactInfo.socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="neu-icon"
+                >
+                  <Icon name={socialIcons[link.label] ?? "globe"} />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="grid gap-5">
-            <div className="gold-border rounded-3xl bg-gradient-to-br from-gold/10 to-onyx p-8">
-              <h2 className="font-display text-4xl leading-tight text-white">Coordonnées</h2>
-              <div className="mt-6 space-y-4 text-sm leading-7 text-white/55">
-                <p>
-                  <strong className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Contact général :</strong>{" "}
-                  <br />
-                  <a href={`mailto:${contactInfo.generalEmail}`} className="text-goldLight hover:text-white">
-                    {contactInfo.generalEmail}
-                  </a>
-                </p>
-                <p>
-                  <strong className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Presse :</strong>{" "}
-                  <br />
-                  <a href={`mailto:${contactInfo.pressEmail}`} className="text-goldLight hover:text-white">
-                    {contactInfo.pressEmail}
-                  </a>
-                </p>
-                <p>
-                  <strong className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Bureau :</strong>{" "}
-                  <br />
-                  {contactInfo.office}
-                </p>
-              </div>
-            </div>
-
-            <div className="glass rounded-3xl p-8">
-              <h2 className="font-display text-4xl leading-tight text-white">Réseaux sociaux</h2>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {contactInfo.socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:text-goldLight hover:shadow-glow"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
+          <div className="neu p-8 sm:p-10">
+            <h2 className="mb-8 font-display text-3xl font-bold text-heading">Envoyer un message</h2>
+            <ContactForm />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -28,18 +28,18 @@ export function ContactForm() {
   return (
     <form className="grid gap-5" onSubmit={handleSubmit}>
       {status === "success" && (
-        <div className="rounded-xl border border-emerald-400/25 bg-emerald-400/10 p-4 text-sm text-emerald-300">
+        <div className="rounded-md border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
           {message}
         </div>
       )}
       {status === "error" && (
-        <div className="rounded-xl border border-rose-400/25 bg-rose-500/10 p-4 text-sm text-rose-300">
+        <div className="rounded-md border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
           {message}
         </div>
       )}
 
       <div>
-        <label htmlFor="name" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
+        <label htmlFor="name" className="mb-3 block text-xs font-medium uppercase tracking-[0.12em] text-heading">
           Nom complet *
         </label>
         <input
@@ -52,7 +52,7 @@ export function ContactForm() {
         />
       </div>
       <div>
-        <label htmlFor="email" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
+        <label htmlFor="email" className="mb-3 block text-xs font-medium uppercase tracking-[0.12em] text-heading">
           Email *
         </label>
         <input
@@ -65,7 +65,7 @@ export function ContactForm() {
         />
       </div>
       <div>
-        <label htmlFor="subject" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
+        <label htmlFor="subject" className="mb-3 block text-xs font-medium uppercase tracking-[0.12em] text-heading">
           Objet
         </label>
         <input
@@ -77,7 +77,7 @@ export function ContactForm() {
         />
       </div>
       <div>
-        <label htmlFor="message" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
+        <label htmlFor="message" className="mb-3 block text-xs font-medium uppercase tracking-[0.12em] text-heading">
           Message *
         </label>
         <textarea
@@ -89,7 +89,7 @@ export function ContactForm() {
           className="field"
         />
       </div>
-      <button type="submit" className="btn-gold mt-2 w-full sm:w-fit disabled:opacity-50" disabled={status === "loading"}>
+      <button type="submit" className="neu-btn mt-2 w-full !text-accent disabled:opacity-50" disabled={status === "loading"}>
         {status === "loading" ? "Envoi en cours..." : "Envoyer la demande →"}
       </button>
     </form>

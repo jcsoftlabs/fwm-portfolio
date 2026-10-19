@@ -10,9 +10,9 @@ type ButtonProps = {
 };
 
 const variants = {
-  primary: "btn-gold",
-  secondary: "btn-ghost",
-  ghost: "btn-ghost border-transparent bg-transparent",
+  primary: "neu-btn !text-accent",
+  secondary: "neu-btn",
+  ghost: "btn-accent",
 };
 
 export function Button({
@@ -21,7 +21,7 @@ export function Button({
   variant = "primary",
   className,
 }: ButtonProps) {
-  const classes = cn(variants[variant], "group", className);
+  const classes = cn(variants[variant], className);
 
   if (href) {
     return (

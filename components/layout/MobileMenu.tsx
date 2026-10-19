@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Icon } from "@/components/ui/Icon";
 
 type NavItem = {
   href: string;
@@ -33,47 +34,63 @@ export function MobileMenu({ items }: MobileMenuProps) {
     <div className="lg:hidden">
       <button
         type="button"
-        aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+        aria-label="Ouvrir le menu"
         aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-        className="relative z-[60] inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-white backdrop-blur transition-colors hover:border-gold"
+        onClick={() => setOpen(true)}
+        className="neu-icon !h-12 !w-12"
       >
-        <span className="space-y-1.5">
-          <span className={cn("block h-px w-5 bg-current transition duration-300", open && "translate-y-[3.5px] rotate-45")} />
-          <span className={cn("block h-px w-5 bg-current transition duration-300", open && "-translate-y-[3.5px] -rotate-45")} />
-        </span>
+        <Icon name="menu" />
       </button>
 
-      {/* Plein écran — rendu dans <body> pour échapper au backdrop-filter de la navbar */}
-      {mounted && createPortal(
-      <div
-        className={cn(
-          "fixed inset-0 z-40 flex flex-col justify-center bg-night/95 px-8 backdrop-blur-2xl transition-all duration-500",
-          open ? "visible opacity-100" : "invisible opacity-0",
-        )}
-      >
-        <div className="pointer-events-none absolute -top-20 right-0 h-80 w-80 rounded-full bg-gold/20 blur-[100px]" />
-        <nav className="relative flex flex-col gap-2">
-          {items.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
+      {/* Tiroir latéral — rendu dans <body> pour échapper au backdrop-filter du header */}
+      {mounted &&
+        createPortal(
+          <div className={cn("fixed inset-0 z-[60] transition-all duration-300", open ? "visible" : "invisible")}>
+            <div
               onClick={() => setOpen(false)}
+              className={cn("absolute inset-0 bg-black/40 transition-opacity duration-300", open ? "opacity-100" : "opacity-0")}
+            />
+            <aside
               className={cn(
-                "flex items-baseline gap-4 py-2 font-display text-5xl transition-all duration-500",
-                open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
-                pathname === item.href ? "text-gold-metal italic" : "text-white/80 hover:text-white",
+                "absolute inset-y-0 left-0 flex w-[82%] max-w-sm flex-col bg-paper p-6 shadow-2xl transition-transform duration-500",
+                open ? "translate-x-0" : "-translate-x-full",
               )}
-              style={{ transitionDelay: open ? `${80 + i * 50}ms` : "0ms" }}
             >
-              <span className="font-sans text-xs text-gold/70">0{i + 1}</span>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      </div>,
-      document.body,
-      )}
+              <div className="flex items-center justify-between border-b border-line pb-6">
+                <span className="font-display text-sm font-bold uppercase tracking-wide text-heading">
+                  Fritz W. Michel
+                </span>
+                <button
+                  type="button"
+                  aria-label="Fermer le menu"
+                  onClick={() => setOpen(false)}
+                  className="neu-icon !h-11 !w-11 text-xl"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-body">
+                Administrateur public, dirigeant et personnalité publique haïtienne.
+              </p>
+              <nav className="mt-8 flex flex-col">
+                {items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "border-b border-line py-4 text-sm font-medium uppercase tracking-wide transition-colors",
+                      pathname === item.href ? "text-accent" : "text-heading hover:text-accent",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </aside>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

@@ -41,7 +41,7 @@ export function Reveal({
   const animationClass = {
     up: "reveal-up",
     fade: "reveal-fade",
-    blur: "reveal-blur",
+    blur: "reveal-up",
   }[animation];
 
   return (

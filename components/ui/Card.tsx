@@ -7,14 +7,5 @@ type CardProps = {
 };
 
 export function Card({ children, className }: CardProps) {
-  return (
-    <div
-      className={cn(
-        "glass rounded-3xl p-8 transition-all duration-500 hover:border-gold/25",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={cn("neu p-8 sm:p-10", className)}>{children}</div>;
 }
