@@ -2,6 +2,8 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import { deleteAchievement } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminRealisationsPage() {
   const achievements = await prisma.achievement.findMany({
     orderBy: { createdAt: "desc" },

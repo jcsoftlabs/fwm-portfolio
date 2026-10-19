@@ -4,6 +4,8 @@ import prisma from "@/lib/prisma";
 import { formatLongDate } from "@/lib/utils";
 import { Icon } from "@/components/ui/Icon";
 
+export const dynamic = "force-dynamic";
+
 type NewsArticlePageProps = {
   params: Promise<{ slug: string }>;
 };

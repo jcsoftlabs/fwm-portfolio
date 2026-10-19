@@ -2,6 +2,8 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import { deleteExperience } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminParcoursPage() {
   const experiences = await prisma.experience.findMany({
     orderBy: { createdAt: "desc" },

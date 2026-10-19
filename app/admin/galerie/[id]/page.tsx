@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 import { uploadPhotoToAlbum } from "../actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminAlbumDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const album = await prisma.album.findUnique({
