@@ -46,7 +46,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-3">
               <span className="relative h-12 w-12 overflow-hidden rounded-full border-[3px] border-white shadow-neu">
-                <Image src="/id.jpeg" alt="Fritz William Michel" fill sizes="48px" className="object-cover object-top" />
+                <Image src="/id.jpeg" alt="Fritz William Michel" fill sizes="200px" className="origin-[68%_0%] scale-[1.8] object-cover" />
               </span>
               <span className="font-display text-sm font-bold uppercase tracking-wide text-heading">Fritz W. Michel</span>
             </Link>

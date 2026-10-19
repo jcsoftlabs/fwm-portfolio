@@ -62,15 +62,17 @@ export function Hero() {
 
         {/* Portrait dans une carte en relief */}
         <div className="reveal-fade order-1 mx-auto w-full max-w-md lg:order-2">
-          <div className="neu p-5">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+          <div className="neu p-4 sm:p-5">
+            {/* Photo source carrée : cadre carré pour ne rien rogner (bras et épaules visibles) */}
+            <div className="relative aspect-square overflow-hidden rounded-lg bg-[#e6e6e6]">
               <Image
                 src="/id.jpeg"
                 alt={`Portrait de ${profile.name}`}
                 fill
                 priority
-                sizes="(max-width: 1024px) 90vw, 420px"
-                className="object-cover object-top"
+                quality={95}
+                sizes="(max-width: 1024px) 90vw, 440px"
+                className="object-cover object-center"
               />
             </div>
           </div>

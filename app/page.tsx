@@ -106,8 +106,8 @@ export default function HomePage() {
           <div className="mt-14 grid gap-8 lg:grid-cols-[0.8fr,1.2fr]">
             <Reveal>
               <div className="neu h-full p-7">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                  <Image src="/id.jpeg" alt="Fritz William Michel" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-top" />
+                <div className="relative aspect-square overflow-hidden rounded-lg bg-[#e6e6e6]">
+                  <Image src="/id.jpeg" alt="Fritz William Michel" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-center" />
                 </div>
                 <h3 className="mt-7 font-display text-2xl font-bold text-heading">Fritz William Michel</h3>
                 <p className="mt-1 text-sm text-muted">Administrateur public · Chef d&apos;entreprise</p>
