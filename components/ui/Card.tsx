@@ -10,7 +10,7 @@ export function Card({ children, className }: CardProps) {
   return (
     <div
       className={cn(
-        "surface-panel rounded-xl p-6 shadow-soft transition-all duration-300 hover:shadow-strong",
+        "glass rounded-3xl p-8 transition-all duration-500 hover:border-gold/25",
         className,
       )}
     >

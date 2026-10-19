@@ -2,62 +2,58 @@ import Link from "next/link";
 import Image from "next/image";
 import { NewsArticle } from "@/types";
 import { formatLongDate } from "@/lib/utils";
+import { Spotlight } from "@/components/ui/Spotlight";
 
 type NewsCardProps = {
   article: NewsArticle;
 };
 
+const categoryTone: Record<string, string> = {
+  Gouvernance: "text-goldLight border-gold/30 bg-gold/10",
+  Dialogue: "text-sky-300 border-sky-300/25 bg-sky-400/10",
+  "Prise de parole": "text-violet-300 border-violet-300/25 bg-violet-400/10",
+  "Communiqué": "text-emerald-300 border-emerald-300/25 bg-emerald-400/10",
+};
+
 export function NewsCard({ article }: NewsCardProps) {
-  const categoryColors: Record<string, string> = {
-    Gouvernance: "bg-[#A8872A]",
-    Dialogue: "bg-[#4A7FA5]",
-    "Prise de parole": "bg-[#1a1a2e]",
-    "Communiqué": "bg-[#6B8C6B]",
-  };
-  const categoryTextColors: Record<string, string> = {
-    Gouvernance: "text-[#A8872A]",
-    Dialogue: "text-[#4A7FA5]",
-    "Prise de parole": "text-[#1a1a2e]",
-    "Communiqué": "text-[#6B8C6B]",
-  };
-  const colorBg = categoryColors[article.category] || "bg-gold";
-  const colorText = categoryTextColors[article.category] || "text-gold";
+  const tone = categoryTone[article.category] || categoryTone.Gouvernance;
 
   return (
-    <div className="group flex flex-col border border-slate-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:border-gold/30 overflow-hidden">
-      {/* Top accent bar */}
-      <div className={`h-[4px] w-full ${colorBg}`} />
-      
-      {/* Image if available */}
-      {article.imagePath && (
-        <div className="relative h-48 w-full overflow-hidden border-b border-slate-100">
-          <Image 
-            src={article.imagePath} 
-            alt={article.title} 
-            fill 
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        </div>
-      )}
-
-      <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-center justify-between gap-4">
-          <span className={`inline-block bg-slate-50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${colorText} border border-slate-200`}>
+    <Link href={`/actualites/${article.slug}`} className="block h-full">
+      <Spotlight className="flex h-full flex-col">
+        <div className="relative h-52 w-full overflow-hidden">
+          {article.imagePath ? (
+            <Image
+              src={article.imagePath}
+              alt={article.title}
+              fill
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-gold/25 via-graphite to-onyx">
+              <div className="bg-grid absolute inset-0" />
+              <span className="absolute bottom-4 right-6 font-display text-8xl italic text-white/[0.06]">FWM</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-onyx via-onyx/20 to-transparent" />
+          <span className={`absolute left-5 top-5 rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur ${tone}`}>
             {article.category}
           </span>
-          <span className="text-xs text-slate-400">{formatLongDate(article.date)}</span>
         </div>
-        <h3 className="mt-5 font-display text-xl font-semibold text-navy leading-snug">{article.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-steel">{article.excerpt}</p>
-        <Link
-          href={`/actualites/${article.slug}`}
-          className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-gold transition-colors hover:text-navy"
-        >
-          Lire l&apos;article
-          <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-        </Link>
-      </div>
-    </div>
+
+        <div className="flex flex-1 flex-col p-7">
+          <span className="text-xs text-white/35">{formatLongDate(article.date)}</span>
+          <h3 className="mt-3 font-display text-2xl leading-snug text-white transition-colors duration-300 group-hover:text-goldLight">
+            {article.title}
+          </h3>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-white/50">{article.excerpt}</p>
+          <span className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-gold">
+            Lire l&apos;article
+            <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+          </span>
+        </div>
+      </Spotlight>
+    </Link>
   );
 }

@@ -1,159 +1,117 @@
 import Image from "next/image";
+import Link from "next/link";
 import { profile } from "@/lib/mock-data";
-import { Button } from "@/components/ui/Button";
+import { CountUp } from "@/components/ui/CountUp";
+
+const stats = [
+  { value: 20, suffix: "+", label: "Ans d'expérience" },
+  { value: 3, suffix: "", label: "Entreprises dirigées" },
+  { value: 15, suffix: "", label: "Années au MEF" },
+];
 
 export function Hero() {
   return (
-    <section className="relative reveal-fade overflow-hidden bg-white px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
-      <div className="relative z-10 grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden pb-24 pt-36 lg:pt-32">
+      {/* Fond : grille, aurora, faisceau */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="bg-grid absolute inset-0" />
+        <div className="absolute -left-40 top-10 h-[620px] w-[620px] animate-aurora rounded-full bg-gold/25 blur-[140px]" />
+        <div className="absolute right-[-10%] top-[-10%] h-[520px] w-[520px] animate-aurora rounded-full bg-[#5b4bff]/15 blur-[140px] [animation-delay:-9s]" />
+        <div className="absolute bottom-[-20%] left-1/3 h-[420px] w-[420px] animate-aurora rounded-full bg-[#ff7a45]/10 blur-[140px] [animation-delay:-4s]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-night to-transparent" />
+      </div>
 
-        {/* LEFT — Text content */}
-        <div className="reveal-up">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-gold" />
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
-              Site Officiel
-            </p>
+      <div className="page-shell grid w-full items-center gap-16 lg:grid-cols-[1.15fr,0.85fr] lg:gap-10">
+        {/* Texte */}
+        <div>
+          <div className="reveal-blur">
+            <span className="eyebrow">
+              <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-gold" />
+              Site Officiel · Haïti
+            </span>
           </div>
 
-          <h1 className="font-display text-6xl font-bold leading-[1.05] tracking-tight text-ink sm:text-7xl lg:text-8xl">
-            Bonjour,<br />
-            <span className="text-[#7B7B7B]">je suis Fritz.</span>
+          <h1 className="reveal-blur mt-8 font-display text-[clamp(3.5rem,9vw,8.5rem)] leading-[0.88] tracking-tight text-white [animation-delay:120ms]">
+            Fritz William
+            <br />
+            <span className="text-gold-metal italic">Michel.</span>
           </h1>
 
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-steel">
-            Ex-Directeur de Cabinet du Ministre de l&apos;Économie et des Finances d&apos;Haïti, PDG de 3 entreprises. Un parcours ancré dans la rigueur institutionnelle et le service public.
+          <p className="reveal-blur mt-8 max-w-xl text-lg leading-relaxed text-white/55 [animation-delay:240ms]">
+            Ex-Directeur de Cabinet du Ministre de l&apos;Économie et des Finances d&apos;Haïti, PDG de 3 entreprises.{" "}
+            <span className="text-white/85">Un parcours ancré dans la rigueur institutionnelle et le service public.</span>
           </p>
 
-          {/* Stats */}
-          <div className="mt-8 flex flex-wrap gap-8 border-t border-slate-100 pt-8">
-            <div>
-              <p className="font-display text-4xl font-bold text-ink">20+</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-widest text-steel">Ans d&apos;expérience</p>
-            </div>
-            <div className="w-px bg-slate-200 self-stretch" />
-            <div>
-              <p className="font-display text-4xl font-bold text-ink">3</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-widest text-steel">Entreprises dirigées</p>
-            </div>
-            <div className="w-px bg-slate-200 self-stretch" />
-            <div>
-              <p className="font-display text-4xl font-bold text-ink">15</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-widest text-steel">Années au MEF</p>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button
-              href="/parcours"
-              variant="secondary"
-              className="bg-ink text-white hover:bg-gold border-none px-8 py-3 transition-colors"
-            >
+          <div className="reveal-blur mt-10 flex flex-wrap gap-4 [animation-delay:360ms]">
+            <Link href="/parcours" className="btn-gold group">
               Découvrir le parcours
-            </Button>
-            <Button
-              href="/contact"
-              variant="ghost"
-              className="border border-slate-200 text-ink hover:bg-slate-50 px-8 py-3 bg-white"
-            >
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+            <Link href="/contact" className="btn-ghost">
               Me contacter
-            </Button>
+            </Link>
           </div>
-        </div>
 
-        {/* RIGHT — Laptop mockup with grayscale photo */}
-        <div className="reveal-up flex items-center justify-center lg:justify-end">
-          <div className="relative w-full max-w-lg">
-
-            {/* Laptop Screen */}
-            <div className="relative mx-auto" style={{ width: "100%" }}>
-              {/* Screen bezel */}
-              <div
-                className="relative rounded-t-xl overflow-hidden shadow-2xl"
-                style={{
-                  background: "#1a1a1a",
-                  padding: "10px 10px 0 10px",
-                  borderRadius: "14px 14px 0 0",
-                }}
-              >
-                {/* Camera dot */}
-                <div className="flex justify-center mb-2">
-                  <div className="w-2 h-2 rounded-full bg-[#333]" />
-                </div>
-
-                {/* Screen content — photo in grayscale */}
-                <div
-                  className="relative overflow-hidden"
-                  style={{ borderRadius: "6px 6px 0 0", aspectRatio: "16/10" }}
-                >
-                  <Image
-                    src="/id.jpeg"
-                    alt={`Portrait de ${profile.name}`}
-                    fill
-                    className="object-cover object-top"
-                    style={{ filter: "grayscale(100%) contrast(1.1) brightness(0.95)" }}
-                    priority
-                  />
-                  {/* Subtle overlay with name */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-5">
-                    <p className="font-display text-white text-xl font-semibold tracking-tight">
-                      {profile.name}
-                    </p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <div className="h-px w-4 bg-gold" />
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-gold">
-                        Portrait Officiel
-                      </p>
-                    </div>
-                  </div>
-                </div>
+          {/* Stats */}
+          <div className="reveal-blur mt-14 grid max-w-xl grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.08] [animation-delay:480ms]">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-night/90 px-5 py-5 backdrop-blur">
+                <CountUp to={s.value} suffix={s.suffix} className="font-display text-4xl text-white sm:text-5xl" />
+                <p className="mt-1 text-[10px] font-semibold uppercase leading-snug tracking-[0.18em] text-white/40">
+                  {s.label}
+                </p>
               </div>
-
-              {/* Laptop base / hinge */}
-              <div
-                className="relative mx-auto"
-                style={{
-                  background: "linear-gradient(to bottom, #2a2a2a, #1a1a1a)",
-                  height: "18px",
-                  borderRadius: "0 0 4px 4px",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.25)",
-                }}
-              />
-
-              {/* Laptop stand */}
-              <div
-                className="relative mx-auto"
-                style={{
-                  background: "linear-gradient(to bottom, #1a1a1a, #111)",
-                  height: "12px",
-                  width: "60%",
-                  borderRadius: "0 0 8px 8px",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
-                }}
-              />
-
-              {/* Laptop foot */}
-              <div
-                className="mx-auto mt-0"
-                style={{
-                  background: "#0f0f0f",
-                  height: "4px",
-                  width: "80%",
-                  borderRadius: "0 0 8px 8px",
-                  boxShadow: "0 8px 30px rgba(0,0,0,0.15)",
-                }}
-              />
-            </div>
-
-            {/* Decorative gold accent */}
-            <div className="absolute -right-4 -top-4 h-24 w-24 border-r-2 border-t-2 border-gold/30 pointer-events-none" />
-            <div className="absolute -bottom-4 -left-4 h-24 w-24 border-b-2 border-l-2 border-slate-200 pointer-events-none" />
+            ))}
           </div>
         </div>
+
+        {/* Portrait */}
+        <div className="reveal-blur relative mx-auto w-full max-w-[440px] [animation-delay:200ms]">
+          {/* Anneaux en rotation */}
+          <div className="pointer-events-none absolute -inset-10 animate-spin-slower rounded-full border border-dashed border-gold/20" />
+          <div className="pointer-events-none absolute -inset-4 animate-spin-slow rounded-full [background:conic-gradient(from_0deg,transparent_0deg,rgba(241,213,138,0.55)_60deg,transparent_120deg)] [mask:radial-gradient(farthest-side,transparent_calc(100%-1px),#000_calc(100%-1px))]" />
+
+          <div className="animate-float">
+            <div className="gold-border relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] bg-onyx shadow-glow-lg">
+              <Image
+                src="/id.jpeg"
+                alt={`Portrait de ${profile.name}`}
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 440px"
+                className="object-cover object-top"
+                style={{ filter: "grayscale(100%) contrast(1.15) brightness(0.9)" }}
+              />
+              {/* Teinte dorée */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-gold/25 via-transparent to-transparent mix-blend-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-t from-night via-night/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-7">
+                <p className="font-display text-3xl text-white">{profile.name}</p>
+                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.3em] text-goldLight">
+                  Portrait Officiel
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Badges flottants */}
+          <div className="glass absolute -left-6 top-16 hidden animate-float rounded-2xl px-4 py-3 [animation-delay:-2s] sm:block">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Ministère</p>
+            <p className="mt-0.5 text-sm font-semibold text-white">Économie &amp; Finances</p>
+          </div>
+          <div className="glass absolute -right-4 bottom-28 hidden animate-float rounded-2xl px-4 py-3 [animation-delay:-4s] sm:block">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Leadership</p>
+            <p className="mt-0.5 text-sm font-semibold text-white">PDG · 3 entreprises</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Indicateur de scroll */}
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex">
+        <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">Défiler</span>
+        <span className="relative h-12 w-px overflow-hidden bg-white/10">
+          <span className="absolute inset-x-0 top-0 h-1/2 animate-scroll-hint bg-gold" />
+        </span>
       </div>
     </section>
   );

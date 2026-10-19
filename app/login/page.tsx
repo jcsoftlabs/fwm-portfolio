@@ -31,7 +31,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-ivory">
+    <div className="min-h-screen flex items-center justify-center bg-ivory text-ink [color-scheme:light]">
       <div className="max-w-md w-full p-8 bg-white shadow-strong border border-slate-200">
         <div className="text-center mb-8">
           <div className="inline-flex h-12 w-16 items-center justify-center bg-navy text-white font-bold tracking-widest text-sm mb-4">

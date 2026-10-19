@@ -28,18 +28,18 @@ export function ContactForm() {
   return (
     <form className="grid gap-5" onSubmit={handleSubmit}>
       {status === "success" && (
-        <div className="bg-green-50 text-green-700 p-4 border border-green-200 text-sm">
+        <div className="rounded-xl border border-emerald-400/25 bg-emerald-400/10 p-4 text-sm text-emerald-300">
           {message}
         </div>
       )}
       {status === "error" && (
-        <div className="bg-red-50 text-red-700 p-4 border border-red-200 text-sm">
+        <div className="rounded-xl border border-rose-400/25 bg-rose-500/10 p-4 text-sm text-rose-300">
           {message}
         </div>
       )}
 
       <div>
-        <label htmlFor="name" className="mb-2 block text-sm font-medium text-navy">
+        <label htmlFor="name" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
           Nom complet *
         </label>
         <input
@@ -48,11 +48,11 @@ export function ContactForm() {
           type="text"
           required
           placeholder="Votre nom"
-          className="w-full rounded-none border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-gold focus:bg-white"
+          className="field"
         />
       </div>
       <div>
-        <label htmlFor="email" className="mb-2 block text-sm font-medium text-navy">
+        <label htmlFor="email" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
           Email *
         </label>
         <input
@@ -61,11 +61,11 @@ export function ContactForm() {
           type="email"
           required
           placeholder="vous@exemple.com"
-          className="w-full rounded-none border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-gold focus:bg-white"
+          className="field"
         />
       </div>
       <div>
-        <label htmlFor="subject" className="mb-2 block text-sm font-medium text-navy">
+        <label htmlFor="subject" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
           Objet
         </label>
         <input
@@ -73,11 +73,11 @@ export function ContactForm() {
           name="subject"
           type="text"
           placeholder="Objet de votre message"
-          className="w-full rounded-none border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-gold focus:bg-white"
+          className="field"
         />
       </div>
       <div>
-        <label htmlFor="message" className="mb-2 block text-sm font-medium text-navy">
+        <label htmlFor="message" className="mb-2 block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
           Message *
         </label>
         <textarea
@@ -86,11 +86,11 @@ export function ContactForm() {
           required
           rows={6}
           placeholder="Votre demande"
-          className="w-full rounded-none border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-gold focus:bg-white"
+          className="field"
         />
       </div>
-      <button type="submit" className="w-full sm:w-fit mt-2 bg-navy px-6 py-3 text-sm font-bold uppercase tracking-widest hover:bg-gold text-white transition-colors disabled:opacity-50" disabled={status === "loading"}>
-        {status === "loading" ? "Envoi en cours..." : "Envoyer la demande"}
+      <button type="submit" className="btn-gold mt-2 w-full sm:w-fit disabled:opacity-50" disabled={status === "loading"}>
+        {status === "loading" ? "Envoi en cours..." : "Envoyer la demande →"}
       </button>
     </form>
   );

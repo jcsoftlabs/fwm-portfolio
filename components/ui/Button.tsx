@@ -10,12 +10,9 @@ type ButtonProps = {
 };
 
 const variants = {
-  primary:
-    "bg-navy text-white hover:bg-ink shadow-soft border border-white/10",
-  secondary:
-    "bg-white/90 text-navy hover:bg-white border border-white/40 shadow-soft",
-  ghost:
-    "bg-transparent text-navy hover:bg-white/70 border border-slate-200",
+  primary: "btn-gold",
+  secondary: "btn-ghost",
+  ghost: "btn-ghost border-transparent bg-transparent",
 };
 
 export function Button({
@@ -24,11 +21,7 @@ export function Button({
   variant = "primary",
   className,
 }: ButtonProps) {
-  const classes = cn(
-    "inline-flex items-center justify-center rounded px-5 py-3 text-sm font-semibold tracking-wide transition-all duration-200",
-    variants[variant],
-    className,
-  );
+  const classes = cn(variants[variant], "group", className);
 
   if (href) {
     return (

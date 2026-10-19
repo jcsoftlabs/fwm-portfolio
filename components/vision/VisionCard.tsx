@@ -1,49 +1,41 @@
 import { VisionAxis } from "@/types";
-import { Card } from "@/components/ui/Card";
+import { Spotlight } from "@/components/ui/Spotlight";
 
 type VisionCardProps = {
   axis: VisionAxis;
+  index?: number;
 };
 
 const iconMap: Record<string, string> = {
   Shield: "⬡",
-  Landmark: "⬛",
+  Landmark: "◆",
   Messages: "◎",
   GraduationCap: "△",
   TrendingUp: "↗",
-  FileCheck: "☑",
+  FileCheck: "✓",
 };
 
-const iconBg: Record<string, string> = {
-  Shield: "bg-gold",
-  Landmark: "bg-gold",
-  Messages: "bg-gold",
-  GraduationCap: "bg-gold",
-  TrendingUp: "bg-gold",
-  FileCheck: "bg-gold",
-};
-
-export function VisionCard({ axis }: VisionCardProps) {
+export function VisionCard({ axis, index = 0 }: VisionCardProps) {
   return (
-    <div className="group flex flex-col border-y border-r border-l-[3px] border-slate-200 border-l-gold bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:bg-gold/5">
-      <div className="flex-1 p-6">
-        <div className={`flex h-11 w-11 items-center justify-center text-lg text-white ${iconBg[axis.icon] ?? "bg-gold"}`}>
-          {iconMap[axis.icon] ?? "•"}
+    <Spotlight className="flex h-full flex-col p-9">
+      <div className="flex items-start justify-between">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gold-metal bg-[length:200%_auto] text-xl text-night shadow-glow transition-all duration-700 group-hover:rotate-6 group-hover:bg-right">
+          {iconMap[axis.icon] ?? "✦"}
         </div>
-        <h3 className="mt-5 font-display text-xl font-semibold text-navy">{axis.title}</h3>
-        <p className="mt-3 text-sm leading-relaxed text-steel">{axis.description}</p>
-        <div className="mt-6 space-y-2">
-          {axis.objectives.map((objective) => (
-            <div
-              key={objective}
-              className="flex items-start gap-3 text-sm text-steel"
-            >
-              <span className="mt-1.5 h-1 w-4 shrink-0 bg-gold/40" />
-              {objective}
-            </div>
-          ))}
-        </div>
+        <span className="font-display text-5xl italic text-white/[0.08] transition-colors duration-500 group-hover:text-gold/30">
+          0{index + 1}
+        </span>
       </div>
-    </div>
+      <h3 className="mt-8 font-display text-3xl leading-tight text-white">{axis.title}</h3>
+      <p className="mt-4 text-sm leading-relaxed text-white/50">{axis.description}</p>
+      <div className="mt-8 space-y-3 border-t border-white/[0.07] pt-6">
+        {axis.objectives.map((objective) => (
+          <div key={objective} className="flex items-start gap-3 text-sm text-white/60">
+            <span className="mt-0.5 text-xs text-gold">✦</span>
+            {objective}
+          </div>
+        ))}
+      </div>
+    </Spotlight>
   );
 }

@@ -1,8 +1,10 @@
 import { Hero } from "@/components/home/Hero";
 import { NewsCard } from "@/components/actualites/NewsCard";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/ui/ContactForm";
+import { Spotlight } from "@/components/ui/Spotlight";
+import { CountUp } from "@/components/ui/CountUp";
+import { Marquee } from "@/components/ui/Marquee";
 import {
   latestNews,
   professionalExperience,
@@ -11,228 +13,233 @@ import {
 } from "@/lib/mock-data";
 import Link from "next/link";
 
+const marqueeItems = [
+  "Service public",
+  "Rigueur budgétaire",
+  "Gouvernance",
+  "Leadership",
+  "Transparence",
+  "Développement national",
+  "Continuité institutionnelle",
+];
+
+function SectionHeader({ eyebrow, title, accent, href }: { eyebrow: string; title: string; accent: string; href: string }) {
+  return (
+    <Reveal animation="blur">
+      <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+        <div>
+          <span className="eyebrow">{eyebrow}</span>
+          <h2 className="mt-6 font-display text-5xl leading-[0.95] tracking-tight text-white sm:text-6xl">
+            {title} <span className="text-gold-metal italic">{accent}</span>
+          </h2>
+        </div>
+        <Link href={href} className="btn-ghost group shrink-0">
+          Tout voir
+          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </Link>
+      </div>
+    </Reveal>
+  );
+}
+
 export default function HomePage() {
   return (
     <div>
-      {/* HERO */}
-      <div className="page-shell py-8 lg:py-10">
-        <Reveal animation="fade">
-          <Hero />
-        </Reveal>
-      </div>
+      <Hero />
 
-      {/* ABOUT ME — asymmetric layout like reference */}
-      <section className="page-shell mt-24">
-        <Reveal>
-          <div className="grid gap-16 lg:grid-cols-[1fr,1fr] lg:items-start">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">À Propos</p>
-              <h2 className="font-display text-4xl font-bold text-ink leading-tight">
-                Un parcours public<br />ancré dans la rigueur.
+      <Marquee items={marqueeItems} />
+
+      {/* À PROPOS — bento */}
+      <section className="page-shell py-32">
+        <div className="grid gap-5 lg:grid-cols-12">
+          <Reveal animation="blur" className="lg:col-span-7">
+            <Spotlight className="h-full p-10 lg:p-12">
+              <span className="eyebrow">À Propos</span>
+              <h2 className="mt-8 font-display text-5xl leading-[0.95] tracking-tight text-white sm:text-6xl">
+                Un parcours public
+                <br />
+                <span className="text-gold-metal italic">ancré dans la rigueur.</span>
               </h2>
-              <p className="mt-6 text-base leading-8 text-steel">
-                Administrateur public, dirigeant et personnalité publique haïtienne, Fritz William Michel a exercé des responsabilités de premier plan au sein du Ministère de l'Économie et des Finances, tout en dirigeant plusieurs entreprises privées.
+              <p className="mt-8 max-w-xl text-base leading-8 text-white/55">
+                Administrateur public, dirigeant et personnalité publique haïtienne, Fritz William Michel a exercé des responsabilités de premier plan au sein du Ministère de l&apos;Économie et des Finances, tout en dirigeant plusieurs entreprises privées.
               </p>
-              <div className="mt-8 space-y-3">
+              <div className="mt-10 grid gap-3 sm:grid-cols-2">
                 {journeyHighlights.slice(0, 4).map((item) => (
                   <div
                     key={item}
-                    className="flex items-start gap-3 text-sm text-steel py-3 border-b border-slate-100"
+                    className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm leading-relaxed text-white/60"
                   >
-                    <span className="mt-2 h-1 w-4 shrink-0 bg-gold" />
+                    <span className="mt-1 text-gold">✦</span>
                     {item}
                   </div>
                 ))}
               </div>
-              <div className="mt-8">
-                <Button href="/parcours" variant="ghost" className="border border-ink text-ink hover:bg-ink hover:text-white px-6 py-3 transition-colors">
-                  Voir le parcours complet →
-                </Button>
-              </div>
-            </div>
-
-            {/* Right — big stat + grid highlights */}
-            <div className="space-y-6">
-              {/* Big featured stat */}
-              <div className="bg-[#F8F8F8] p-10 flex flex-col justify-between min-h-[200px]">
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-steel">Impact institutionnel</p>
-                <div>
-                  <p className="font-display text-8xl font-bold text-ink leading-none">15</p>
-                  <p className="mt-2 text-sm text-steel">Années au Ministère de l'Économie et des Finances d'Haïti</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-ink p-6 text-white">
-                  <p className="font-display text-5xl font-bold">3</p>
-                  <p className="mt-2 text-xs text-white/60 uppercase tracking-widest">Entreprises dirigées</p>
-                </div>
-                <div className="border border-slate-200 p-6">
-                  <p className="font-display text-5xl font-bold text-ink">20+</p>
-                  <p className="mt-2 text-xs text-steel uppercase tracking-widest">Ans d'expérience</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* EXPERIENCE LIST — like "Explore My Design Journey" in reference */}
-      <section className="page-shell mt-24">
-        <Reveal>
-          <div className="flex items-end justify-between mb-10 border-b border-slate-200 pb-6">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-3">Expérience</p>
-              <h2 className="font-display text-4xl font-bold text-ink">
-                Responsabilités clés
-              </h2>
-            </div>
-            <Link href="/parcours" className="text-xs font-bold uppercase tracking-widest text-steel hover:text-ink transition-colors hidden sm:block">
-              Tout voir →
-            </Link>
-          </div>
-        </Reveal>
-
-        <div className="divide-y divide-slate-100">
-          {professionalExperience.slice(0, 5).map((item, i) => (
-            <Reveal key={item} delay={i * 60}>
-              <div className="flex items-center justify-between py-5 group hover:bg-[#F8F8F8] px-2 transition-colors">
-                <div className="flex items-center gap-6">
-                  <span className="font-display text-2xl font-bold text-slate-200 w-10 shrink-0 group-hover:text-gold transition-colors">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-sm text-steel leading-relaxed">{item}</p>
-                </div>
-                <span className="text-xs text-slate-400 shrink-0 ml-6 group-hover:text-ink transition-colors hidden sm:block">
-                  Voir →
-                </span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* DARK CTA BANNER — exactly like reference */}
-      <section className="mt-24 bg-ink">
-        <div className="page-shell py-20">
-          <Reveal animation="fade">
-            <div className="grid gap-8 lg:grid-cols-[1fr,auto] lg:items-center">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">
-                  Disponible pour échanges
-                </p>
-                <h2 className="font-display text-4xl font-bold text-white lg:text-5xl">
-                  Une initiative à discuter ?<br />
-                  <span className="text-white/50">Obtenez une consultation gratuite.</span>
-                </h2>
-              </div>
-              <div className="flex flex-col gap-4 sm:flex-row lg:flex-col xl:flex-row">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-gold px-8 py-4 text-xs font-bold uppercase tracking-widest text-white hover:bg-goldLight transition-colors whitespace-nowrap"
-                >
-                  Démarrer la conversation →
-                </Link>
-                <Link
-                  href="/vision"
-                  className="inline-flex items-center justify-center border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white transition-colors whitespace-nowrap"
-                >
-                  Voir la vision
-                </Link>
-              </div>
-            </div>
+              <Link href="/parcours" className="btn-ghost group mt-10">
+                Voir le parcours complet
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </Link>
+            </Spotlight>
           </Reveal>
-        </div>
-      </section>
 
-      {/* VISION AXES — "Latest Works" style grid */}
-      <section className="page-shell mt-24">
-        <Reveal>
-          <div className="flex items-end justify-between mb-10 border-b border-slate-200 pb-6">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-3">Vision</p>
-              <h2 className="font-display text-4xl font-bold text-ink">
-                Axes prioritaires
-              </h2>
-            </div>
-            <Link href="/vision" className="text-xs font-bold uppercase tracking-widest text-steel hover:text-ink transition-colors hidden sm:block">
-              Tout voir →
-            </Link>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {visionAxes.slice(0, 3).map((axis, i) => (
-            <Reveal key={axis.id} delay={i * 80}>
-              <div className="group relative overflow-hidden bg-[#F8F8F8] p-8 transition-all duration-300 hover:bg-ink cursor-default min-h-[220px] flex flex-col justify-between">
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
-                  0{i + 1}
+          <div className="grid gap-5 lg:col-span-5">
+            <Reveal animation="blur" delay={100}>
+              <div className="gold-border relative flex min-h-[280px] flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-gold/20 via-onyx to-onyx p-10">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gold/30 blur-[90px]" />
+                <p className="relative text-[10px] font-bold uppercase tracking-[0.3em] text-goldLight">
+                  Impact institutionnel
                 </p>
-                <div>
-                  <h3 className="font-display text-xl font-bold text-ink group-hover:text-white transition-colors duration-300 mt-4">
-                    {axis.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-steel group-hover:text-white/60 transition-colors duration-300">
-                    {axis.description}
+                <div className="relative">
+                  <CountUp to={15} className="text-gold-metal font-display text-[9rem] leading-none" />
+                  <p className="mt-2 max-w-xs text-sm text-white/60">
+                    Années au Ministère de l&apos;Économie et des Finances d&apos;Haïti
                   </p>
                 </div>
               </div>
             </Reveal>
+            <div className="grid grid-cols-2 gap-5">
+              <Reveal animation="blur" delay={200}>
+                <Spotlight className="h-full p-7">
+                  <CountUp to={3} className="font-display text-6xl text-white" />
+                  <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Entreprises dirigées</p>
+                </Spotlight>
+              </Reveal>
+              <Reveal animation="blur" delay={300}>
+                <Spotlight className="h-full p-7">
+                  <CountUp to={20} suffix="+" className="font-display text-6xl text-white" />
+                  <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Ans d&apos;expérience</p>
+                </Spotlight>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EXPÉRIENCE — liste interactive */}
+      <section className="page-shell pb-32">
+        <SectionHeader eyebrow="Expérience" title="Responsabilités" accent="clés" href="/parcours" />
+
+        <div className="border-t border-white/[0.08]">
+          {professionalExperience.slice(0, 5).map((item, i) => (
+            <Reveal key={item} delay={i * 70}>
+              <Link
+                href="/parcours"
+                className="group relative flex items-center justify-between gap-6 overflow-hidden border-b border-white/[0.08] py-8"
+              >
+                <span className="absolute inset-0 origin-left scale-x-0 bg-gradient-to-r from-gold/[0.12] to-transparent transition-transform duration-700 ease-out group-hover:scale-x-100" />
+                <div className="relative flex items-center gap-6 sm:gap-10">
+                  <span className="font-display text-4xl italic text-white/15 transition-colors duration-500 group-hover:text-gold sm:text-5xl">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-base leading-relaxed text-white/60 transition-all duration-500 group-hover:translate-x-2 group-hover:text-white sm:text-xl">
+                    {item}
+                  </p>
+                </div>
+                <span className="relative hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-500 group-hover:-rotate-45 group-hover:border-gold group-hover:bg-gold group-hover:text-night sm:flex">
+                  →
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* NEWS — "Design Insights & Trends" style */}
-      <section className="page-shell mt-24">
-        <Reveal>
-          <div className="flex items-end justify-between mb-10 border-b border-slate-200 pb-6">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-3">Actualités</p>
-              <h2 className="font-display text-4xl font-bold text-ink">
-                Dernières publications
-              </h2>
+      {/* CTA — bordure conique animée */}
+      <section className="page-shell pb-32">
+        <Reveal animation="blur">
+          <div className="relative overflow-hidden rounded-[2.5rem] p-px">
+            <div className="absolute inset-[-100%] animate-spin-slow [background:conic-gradient(from_0deg,transparent_0deg,#f1d58a_40deg,transparent_100deg,transparent_180deg,#c9a24b_220deg,transparent_280deg)]" />
+            <div className="relative overflow-hidden rounded-[2.5rem] bg-onyx px-8 py-20 sm:px-16">
+              <div className="bg-grid pointer-events-none absolute inset-0 opacity-60" />
+              <div className="pointer-events-none absolute -bottom-32 left-1/2 h-80 w-[700px] -translate-x-1/2 rounded-full bg-gold/25 blur-[120px]" />
+              <div className="relative grid gap-10 lg:grid-cols-[1fr,auto] lg:items-center">
+                <div>
+                  <span className="eyebrow">
+                    <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-400" />
+                    Disponible pour échanges
+                  </span>
+                  <h2 className="mt-8 font-display text-5xl leading-[0.95] tracking-tight text-white sm:text-7xl">
+                    Une initiative à discuter ?
+                    <br />
+                    <span className="text-gold-metal italic">Parlons-en.</span>
+                  </h2>
+                </div>
+                <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
+                  <Link href="/contact" className="btn-gold group">
+                    Démarrer la conversation
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </Link>
+                  <Link href="/vision" className="btn-ghost">
+                    Voir la vision
+                  </Link>
+                </div>
+              </div>
             </div>
-            <Link href="/actualites" className="text-xs font-bold uppercase tracking-widest text-steel hover:text-ink transition-colors hidden sm:block">
-              Tout voir →
-            </Link>
           </div>
         </Reveal>
-        <div className="grid gap-6 lg:grid-cols-3">
+      </section>
+
+      {/* VISION */}
+      <section className="page-shell pb-32">
+        <SectionHeader eyebrow="Vision" title="Axes" accent="prioritaires" href="/vision" />
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {visionAxes.slice(0, 3).map((axis, i) => (
+            <Reveal key={axis.id} animation="blur" delay={i * 100}>
+              <Spotlight className="flex h-full min-h-[320px] flex-col justify-between p-9">
+                <div className="flex items-center justify-between">
+                  <span className="font-display text-6xl italic text-white/10 transition-colors duration-500 group-hover:text-gold/40">
+                    0{i + 1}
+                  </span>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-500 group-hover:-rotate-45 group-hover:border-gold group-hover:text-gold">
+                    →
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-display text-3xl leading-tight text-white">{axis.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-white/50">{axis.description}</p>
+                </div>
+              </Spotlight>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ACTUALITÉS */}
+      <section className="page-shell pb-32">
+        <SectionHeader eyebrow="Actualités" title="Dernières" accent="publications" href="/actualites" />
+        <div className="grid gap-5 lg:grid-cols-3">
           {latestNews.map((article, i) => (
-            <Reveal key={article.id} delay={i * 100}>
+            <Reveal key={article.id} animation="blur" delay={i * 100}>
               <NewsCard article={article} />
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* CONTACT FORM */}
-      <section className="page-shell mt-24 pb-20">
-        <Reveal>
-          <div className="grid gap-16 lg:grid-cols-[1fr,1.5fr] lg:items-start">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">Contact</p>
-              <h2 className="font-display text-4xl font-bold text-ink">
-                Vous avez une question ?
+      {/* CONTACT */}
+      <section className="page-shell pb-32">
+        <Reveal animation="blur">
+          <div className="grid gap-12 lg:grid-cols-[1fr,1.4fr] lg:items-start">
+            <div className="lg:sticky lg:top-32">
+              <span className="eyebrow">Contact</span>
+              <h2 className="mt-6 font-display text-5xl leading-[0.95] tracking-tight text-white sm:text-6xl">
+                Vous avez une <span className="text-gold-metal italic">question ?</span>
               </h2>
-              <p className="mt-4 text-base text-steel leading-relaxed">
+              <p className="mt-6 text-base leading-relaxed text-white/50">
                 Pour toute demande officielle, médiatique ou institutionnelle, utilisez ce formulaire.
               </p>
-              <div className="mt-8 space-y-4 text-sm text-steel">
-                <div className="flex items-center gap-3">
-                  <div className="h-px w-4 bg-gold" />
-                  <span>Réponse sous 48h ouvrées</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="h-px w-4 bg-gold" />
-                  <span>Demandes médias & presse bienvenues</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="h-px w-4 bg-gold" />
-                  <span>Confidentialité garantie</span>
-                </div>
+              <div className="mt-10 space-y-4">
+                {["Réponse sous 48h ouvrées", "Demandes médias & presse bienvenues", "Confidentialité garantie"].map((t) => (
+                  <div key={t} className="flex items-center gap-4 text-sm text-white/60">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-xs text-goldLight">
+                      ✓
+                    </span>
+                    {t}
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="border border-slate-200 bg-white p-8 shadow-soft">
+            <div className="glass gold-border rounded-[2rem] p-8 sm:p-10">
               <ContactForm />
             </div>
           </div>

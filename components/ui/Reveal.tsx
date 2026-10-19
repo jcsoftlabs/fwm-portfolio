@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: React.ReactNode;
-  animation?: "up" | "fade";
+  animation?: "up" | "fade" | "blur";
   delay?: number;
   className?: string;
   threshold?: number;
@@ -38,7 +38,11 @@ export function Reveal({
     return () => observer.disconnect();
   }, [threshold]);
 
-  const animationClass = animation === "up" ? "reveal-up" : "reveal-fade";
+  const animationClass = {
+    up: "reveal-up",
+    fade: "reveal-fade",
+    blur: "reveal-blur",
+  }[animation];
 
   return (
     <div

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { MediaItem } from "@/types";
-import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 
 type MediaGalleryProps = {
@@ -23,39 +22,39 @@ const labelByType = {
 
 export function MediaGallery({ items }: MediaGalleryProps) {
   return (
-    <div className="grid gap-6 md:grid-cols-2">
-      {items.map((item) => (
-        <div key={item.id} className="group flex flex-col border border-slate-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-strong hover:border-gold/30">
+    <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5">
+      {items.map((item, i) => (
+        <div
+          key={item.id}
+          className="group relative break-inside-avoid overflow-hidden rounded-3xl border border-white/[0.08] bg-onyx transition-all duration-500 hover:border-gold/40 hover:shadow-glow"
+        >
           {item.imagePath ? (
-            <div className="relative h-64 overflow-hidden">
+            <div className={`relative overflow-hidden ${i % 3 === 0 ? "aspect-[4/5]" : "aspect-[4/3]"}`}>
               <Image
                 src={item.imagePath}
                 alt={item.title}
                 fill
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
-                  {item.placeholder}
-                </p>
-                <p className="mt-2 font-display text-2xl font-semibold leading-tight">{item.title}</p>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
             </div>
           ) : (
-            <div className="flex h-64 items-center justify-center bg-gradient-to-br from-ink to-steel text-center text-white">
-              <div className="px-6">
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
-                  {item.placeholder}
-                </p>
-                <p className="mt-2 font-display text-2xl font-semibold leading-tight">{item.title}</p>
-              </div>
+            <div className="relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-gold/20 via-graphite to-onyx">
+              <div className="bg-grid absolute inset-0" />
             </div>
           )}
-          <div className="flex-1 p-6">
-            <Badge variant={variantByType[item.type]}>{labelByType[item.type]}</Badge>
-            <p className="mt-4 text-sm leading-relaxed text-steel">{item.description}</p>
+          <div className="absolute inset-x-0 bottom-0 translate-y-2 p-6 transition-transform duration-500 group-hover:translate-y-0">
+            {item.type && labelByType[item.type] ? (
+              <Badge variant={variantByType[item.type]}>{labelByType[item.type]}</Badge>
+            ) : null}
+            {item.placeholder ? (
+              <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.3em] text-goldLight">{item.placeholder}</p>
+            ) : null}
+            <p className="mt-2 font-display text-2xl leading-tight text-white">{item.title}</p>
+            {item.description ? (
+              <p className="mt-2 text-sm leading-relaxed text-white/60">{item.description}</p>
+            ) : null}
           </div>
         </div>
       ))}

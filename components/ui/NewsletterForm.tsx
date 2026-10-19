@@ -27,18 +27,18 @@ export function NewsletterForm() {
 
   return (
     <div className="w-full">
-      <form onSubmit={handleSubmit} className="flex max-w-sm mt-4">
+      <form onSubmit={handleSubmit} className="mt-5 flex max-w-sm items-center rounded-full border border-white/10 bg-white/[0.04] p-1 transition focus-within:border-gold/50">
         <input
           type="email"
           name="email"
           required
           placeholder="Votre adresse email"
-          className="w-full bg-white/5 border border-white/20 px-4 py-2 text-sm text-white placeholder:text-slate-500 focus:border-gold focus:outline-none"
+          className="w-full min-w-0 bg-transparent px-4 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="bg-gold px-4 py-2 text-xs font-bold uppercase tracking-widest text-white hover:bg-goldLight transition-colors disabled:opacity-50"
+          className="btn-gold shrink-0 !px-4 !py-2.5 !text-[10px] disabled:opacity-50"
         >
           {status === "loading" ? "..." : "S'inscrire"}
         </button>

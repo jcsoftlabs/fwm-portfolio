@@ -38,54 +38,47 @@ export function Footer() {
   if (isAdminOrLogin) return null;
 
   return (
-    <footer className="mt-0 bg-ink text-white">
+    <footer className="relative overflow-hidden border-t border-white/[0.07] bg-night">
+      <div className="pointer-events-none absolute -bottom-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-gold/10 blur-[140px]" />
 
-      {/* Big CTA email band — like the reference */}
-      <div className="border-b border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">
-                Vous avez une vision ? Faisons-la vivre !
-              </p>
-              <a
-                href="mailto:contact@fritzwilliammichel.ht"
-                className="font-display text-3xl font-bold text-white transition-colors duration-300 hover:text-gold sm:text-4xl lg:text-5xl"
-              >
-                contact@fritzwilliammichel.ht
-              </a>
-            </div>
-            <Link
-              href="/contact"
-              className="shrink-0 inline-flex items-center gap-2 border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-gold hover:border-gold hover:text-white rounded-sm"
+      {/* Bandeau email géant */}
+      <div className="relative border-b border-white/[0.07]">
+        <div className="page-shell py-20">
+          <span className="eyebrow">Vous avez une vision ? Faisons-la vivre</span>
+          <div className="mt-8 flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
+            <a
+              href="mailto:contact@fritzwilliammichel.ht"
+              className="group font-display text-4xl leading-none text-white transition-colors sm:text-6xl lg:text-7xl"
             >
+              <span className="bg-gradient-to-r from-white to-white bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-2 transition-all duration-700 group-hover:bg-[length:100%_1px] group-hover:text-goldLight">
+                contact@fritzwilliammichel.ht
+              </span>
+            </a>
+            <Link href="/contact" className="btn-gold shrink-0">
               Envoyer un message →
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Main footer grid */}
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[2fr,1fr,1fr,1.5fr]">
-
-          {/* Brand column */}
+      {/* Grille principale */}
+      <div className="page-shell relative py-16">
+        <div className="grid gap-12 lg:grid-cols-[2fr,1fr,1fr,1.6fr]">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center bg-gold text-xs font-bold tracking-widest text-white rounded-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-metal text-[11px] font-extrabold tracking-widest text-night shadow-glow">
                 FW
               </div>
               <div>
-                <p className="font-display text-sm font-bold text-white">Fritz William Michel</p>
-                <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-gold/80 mt-0.5">
+                <p className="font-display text-lg text-white">Fritz William Michel</p>
+                <p className="text-[9px] font-semibold uppercase tracking-[0.3em] text-gold/80">
                   Administrateur Public · Haïti
                 </p>
               </div>
             </div>
-            <p className="mt-6 max-w-sm text-sm leading-7 text-white/50">
+            <p className="mt-6 max-w-sm text-sm leading-7 text-white/45">
               Administrateur public, dirigeant et personnalité publique haïtienne. Un parcours associant rigueur institutionnelle et développement national.
             </p>
-            {/* Social links */}
             <div className="mt-8 flex gap-3">
               {socialLinks.map((s) => (
                 <a
@@ -94,7 +87,7 @@ export function Footer() {
                   aria-label={s.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center border border-white/10 text-xs font-bold text-white/40 transition-all duration-200 hover:border-gold hover:text-gold rounded-sm"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[11px] font-bold text-white/50 transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:text-goldLight hover:shadow-glow"
                 >
                   {s.short}
                 </a>
@@ -102,19 +95,17 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Nav columns */}
           {footerNav.map((col) => (
             <div key={col.title}>
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold mb-6">
-                {col.title}
-              </p>
+              <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.3em] text-gold">{col.title}</p>
               <ul className="space-y-4">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/50 transition-colors duration-200 hover:text-white"
+                      className="group inline-flex items-center gap-2 text-sm text-white/50 transition-colors duration-200 hover:text-white"
                     >
+                      <span className="h-px w-0 bg-gold transition-all duration-300 group-hover:w-4" />
                       {link.label}
                     </Link>
                   </li>
@@ -123,24 +114,27 @@ export function Footer() {
             </div>
           ))}
 
-          {/* Newsletter */}
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold mb-6">
-              Newsletter
-            </p>
-            <p className="text-sm text-white/50 mb-4 leading-relaxed">
+          <div className="glass rounded-3xl p-6">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Newsletter</p>
+            <p className="text-sm leading-relaxed text-white/50">
               Recevez les actualités et communiqués officiels directement dans votre boîte mail.
             </p>
             <NewsletterForm />
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-          <p className="text-xs text-white/30">
-            © 2026 Fritz William Michel — Tous droits réservés
-          </p>
-          <p className="text-xs text-white/30">
+        {/* Nom géant en contour */}
+        <p
+          aria-hidden
+          className="text-outline pointer-events-none mt-16 select-none whitespace-nowrap text-center font-display text-[15vw] leading-none lg:text-[11rem]"
+        >
+          Fritz W. Michel
+        </p>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-white/[0.07] pt-8 sm:flex-row sm:items-center">
+          <p className="text-xs text-white/30">© 2026 Fritz William Michel — Tous droits réservés</p>
+          <p className="flex items-center gap-2 text-xs text-white/30">
+            <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-gold" />
             Haïti · Site Officiel
           </p>
         </div>
