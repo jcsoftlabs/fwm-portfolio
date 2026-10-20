@@ -10,8 +10,8 @@ export function Timeline({ items }: TimelineProps) {
   return (
     <div className="border-l-[5px] border-[#d9dee2]">
       {items.map((item) => (
-        <Reveal key={item.id}>
-          <div className="relative pb-10 pl-10 last:pb-0">
+        <Reveal key={item.id} className="pb-10 last:pb-0">
+          <div className="relative pl-10">
             <span className="absolute left-0 top-12 h-[5px] w-8 bg-[#d9dee2]" />
             <span className="absolute -left-[13px] top-[42px] h-5 w-5 rounded-full border-[5px] border-[#d9dee2] bg-paper" />
 
